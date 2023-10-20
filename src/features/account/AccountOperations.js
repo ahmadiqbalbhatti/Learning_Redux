@@ -6,7 +6,7 @@ import {
 import {
   deposit,
   payLoan,
-  requestLoad,
+  requestLoan,
   withdraw
 } from "./accountSlice";
 
@@ -28,6 +28,7 @@ function AccountOperations() {
   function handleDeposit() {
     if (!depositAmount) return;
     dispatch(deposit(depositAmount, currency));
+    // dispatch(deposit(depositAmount));
     setDepositAmount("");
     setCurrency("USD");
   }
@@ -40,7 +41,10 @@ function AccountOperations() {
 
   function handleRequestLoan() {
     if (!loanAmount || !loanPurpose) return;
-    dispatch(requestLoad(loanAmount, loanPurpose));
+    console.log(loanAmount);
+    // // as by default action creator uses accept single argument - Solution 1
+    // dispatch(requestLoan({amount: loanAmount, purpose: loanPurpose}));
+    dispatch(requestLoan(loanAmount, loanPurpose));
     setLoanPurpose("");
     setLoanAmount("");
   }
@@ -51,7 +55,7 @@ function AccountOperations() {
   }
 
   // console.log(isLoading);
-  console.log(currentLoan);
+  // console.log(currentLoan);
   return (
     <div>
       <h2>Your account operations</h2>
